@@ -1,0 +1,1222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Operation LOL: The Government Meme Machine</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Lora:ital,wght@0,400;0,500;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            --bg: #fafafa;
+            --bg-card: #ffffff;
+            --bg-alt: #f3f4f6;
+            --bg-hero: #111827;
+            --accent: #4f46e5;
+            --accent-light: #6366f1;
+            --accent-bg: rgba(79, 70, 229, 0.06);
+            --red: #dc2626;
+            --red-bg: rgba(220, 38, 38, 0.07);
+            --amber: #d97706;
+            --amber-bg: rgba(217, 119, 6, 0.07);
+            --green: #059669;
+            --green-bg: rgba(5, 150, 105, 0.07);
+            --blue: #2563eb;
+            --blue-bg: rgba(37, 99, 235, 0.07);
+            --text: #1f2937;
+            --text-secondary: #6b7280;
+            --border: #e5e7eb;
+            --border-strong: #d1d5db;
+            --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.07), 0 2px 4px -2px rgba(0,0,0,0.05);
+            --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.08), 0 4px 6px -4px rgba(0,0,0,0.04);
+            --radius: 12px;
+            --radius-sm: 8px;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: 'Lora', Georgia, serif;
+            font-size: 17px;
+            line-height: 1.8;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* ===== NAV ===== */
+        nav {
+            position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+            background: rgba(255,255,255,0.92);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--border);
+        }
+        .nav-inner {
+            max-width: 1080px; margin: 0 auto;
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 0 28px;
+        }
+        nav .logo {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 13px; font-weight: 500;
+            color: var(--accent); letter-spacing: 1.5px; text-transform: uppercase;
+            padding: 16px 0;
+        }
+        nav ul { list-style: none; display: flex; gap: 2px; }
+        nav a {
+            color: var(--text-secondary); text-decoration: none;
+            font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 500;
+            text-transform: uppercase; letter-spacing: 0.5px;
+            padding: 18px 14px; display: block; transition: color 0.2s;
+        }
+        nav a:hover, nav a.active { color: var(--accent); }
+
+        /* ===== LAYOUT ===== */
+        .container { max-width: 780px; margin: 0 auto; padding: 0 28px; }
+        .container-wide { max-width: 960px; margin: 0 auto; padding: 0 28px; }
+        section { padding: 80px 0; }
+        .divider { border: none; height: 1px; background: var(--border); margin: 0; }
+
+        /* ===== HERO ===== */
+        .hero {
+            min-height: 100vh; display: flex; align-items: center; justify-content: center;
+            text-align: center; padding: 80px 28px 60px;
+            background: var(--bg-hero);
+            color: #fff;
+        }
+        .hero-content { max-width: 720px; }
+        .hero .eyebrow {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 12px; color: #f87171; letter-spacing: 3px;
+            text-transform: uppercase; margin-bottom: 28px;
+            animation: pulse 2.5s ease-in-out infinite;
+        }
+        @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
+        .hero h1 {
+            font-family: 'Inter', sans-serif;
+            font-size: clamp(2.2rem, 5.5vw, 3.8rem);
+            font-weight: 900; line-height: 1.12; letter-spacing: -1px;
+            margin-bottom: 24px; color: #fff;
+        }
+        .hero .subtitle {
+            font-size: 1.15rem; color: #d1d5db;
+            max-width: 560px; margin: 0 auto 44px; line-height: 1.7;
+        }
+        .hero .scroll-hint {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 11px; color: #9ca3af; letter-spacing: 2px; text-transform: uppercase;
+        }
+        .hero .scroll-hint span { display: block; margin-top: 8px; animation: bounce 2s ease-in-out infinite; }
+        @keyframes bounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(6px)} }
+
+        /* ===== TYPOGRAPHY ===== */
+        h2 {
+            font-family: 'Inter', sans-serif;
+            font-size: 1.9rem; font-weight: 800; color: var(--text);
+            margin-bottom: 10px; letter-spacing: -0.5px;
+        }
+        h3 {
+            font-family: 'Inter', sans-serif;
+            font-size: 1.25rem; font-weight: 700; color: var(--text);
+            margin-bottom: 8px;
+        }
+        .section-label {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 12px; font-weight: 500;
+            color: var(--accent); letter-spacing: 2.5px;
+            text-transform: uppercase; margin-bottom: 6px;
+        }
+        .section-desc {
+            color: var(--text-secondary); max-width: 600px; margin-bottom: 44px;
+        }
+        p + p { margin-top: 16px; }
+
+        /* ===== EVIDENCE CARDS ===== */
+        .evidence-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 36px; margin-bottom: 28px;
+            box-shadow: var(--shadow-sm);
+            transition: box-shadow 0.3s, border-color 0.3s;
+        }
+        .evidence-card:hover { box-shadow: var(--shadow-md); border-color: var(--border-strong); }
+        .evidence-card .card-number {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 12px; font-weight: 500;
+            color: var(--accent); letter-spacing: 2px;
+            text-transform: uppercase; margin-bottom: 10px;
+        }
+        .evidence-card .claim-label {
+            font-family: 'Inter', sans-serif;
+            font-size: 11px; font-weight: 600;
+            text-transform: uppercase; letter-spacing: 2px;
+            color: var(--amber); margin-top: 20px; margin-bottom: 6px;
+        }
+        .evidence-card .evidence-text {
+            background: var(--bg-alt);
+            border-left: 3px solid var(--accent);
+            padding: 16px 20px; margin: 14px 0;
+            border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+            font-size: 0.95rem;
+        }
+        .evidence-card .commentary {
+            color: var(--text-secondary); font-style: italic; margin-top: 14px;
+        }
+
+        .red-flag {
+            display: inline-block;
+            background: var(--red-bg); color: var(--red);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.82rem; font-weight: 500;
+            padding: 2px 10px; border-radius: 4px; margin: 3px 2px;
+        }
+        .stat-highlight {
+            font-family: 'Inter', sans-serif;
+            font-size: 2.4rem; font-weight: 900;
+            color: var(--accent); display: block; margin: 12px 0;
+        }
+        .stat-context { font-size: 0.9rem; color: var(--text-secondary); }
+
+        /* ===== IMAGE PLACEHOLDERS ===== */
+        .img-container {
+            background: var(--bg-alt); border: 1px solid var(--border);
+            border-radius: var(--radius-sm); padding: 20px;
+            margin: 16px 0; text-align: center;
+        }
+        .img-container .img-placeholder {
+            background: linear-gradient(135deg, #eef2ff 0%, #e0e7ff 100%);
+            border-radius: 6px; padding: 44px 24px;
+            color: var(--text-secondary);
+            font-family: 'JetBrains Mono', monospace; font-size: 13px;
+            border: 1px dashed var(--border-strong);
+        }
+        .img-container .img-caption {
+            font-size: 0.82rem; color: var(--text-secondary);
+            margin-top: 10px; font-style: italic;
+        }
+        .img-container .manipulation-badge {
+            display: inline-block;
+            background: var(--red-bg); color: var(--red);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 11px; font-weight: 500;
+            padding: 3px 10px; border-radius: 3px;
+            margin-top: 8px; letter-spacing: 1px; text-transform: uppercase;
+        }
+
+        /* ===== ANALYSIS SECTION ===== */
+        .analysis-zone { background: var(--bg-alt); border-top: 2px solid var(--blue); }
+        .analysis-zone .section-label { color: var(--blue); }
+        .analysis-card {
+            background: var(--bg-card); border: 1px solid var(--border);
+            border-radius: var(--radius); padding: 32px;
+            margin-bottom: 24px; box-shadow: var(--shadow-sm);
+        }
+        .analysis-card h4 {
+            font-family: 'Inter', sans-serif;
+            font-size: 1.05rem; font-weight: 700;
+            color: var(--text); margin-bottom: 12px;
+        }
+
+        .tag {
+            display: inline-block;
+            font-family: 'Inter', sans-serif;
+            font-size: 12px; font-weight: 600;
+            padding: 3px 12px; border-radius: 20px;
+            margin: 3px 4px 3px 0;
+        }
+        .tag-fallacy { background: var(--red-bg); color: var(--red); }
+        .tag-misinfo { background: var(--amber-bg); color: var(--amber); }
+        .tag-debunk { background: var(--green-bg); color: var(--green); }
+        .tag-conspir { background: var(--blue-bg); color: var(--blue); }
+
+        .debunk-box {
+            background: var(--green-bg);
+            border-left: 3px solid var(--green);
+            padding: 16px 20px; border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+            margin: 14px 0;
+        }
+        .debunk-box .debunk-label {
+            font-family: 'Inter', sans-serif;
+            font-size: 11px; font-weight: 600;
+            text-transform: uppercase; letter-spacing: 2px;
+            color: var(--green); margin-bottom: 6px;
+        }
+
+        /* ===== PURPOSE ===== */
+        .purpose-zone { background: var(--bg); }
+        .purpose-zone .section-label { color: var(--amber); }
+        .callout-box {
+            background: var(--bg-card); border: 1px solid var(--amber);
+            border-radius: var(--radius); padding: 32px;
+            margin: 24px 0; box-shadow: var(--shadow-sm);
+        }
+
+        /* ===== CITATIONS ===== */
+        .citation-list { list-style: none; counter-reset: cite; }
+        .citation-list li {
+            counter-increment: cite;
+            padding: 12px 0; border-bottom: 1px solid var(--border);
+            font-size: 0.92rem; color: var(--text-secondary);
+            padding-left: 40px; position: relative;
+        }
+        .citation-list li::before {
+            content: counter(cite) ".";
+            position: absolute; left: 0;
+            color: var(--accent);
+            font-family: 'JetBrains Mono', monospace; font-size: 0.85rem;
+        }
+
+        /* ===== TERM HIGHLIGHTS ===== */
+        .term { font-weight: 700; color: var(--amber); }
+        .term-blue { font-weight: 700; color: var(--blue); }
+        .term-red { font-weight: 700; color: var(--red); }
+        .term-green { font-weight: 700; color: var(--green); }
+
+        /* ===== THESIS ===== */
+        .thesis {
+            font-family: 'Inter', sans-serif;
+            font-weight: 700; font-size: 1.1rem;
+            color: var(--text);
+            background: var(--accent-bg);
+            border-left: 4px solid var(--accent);
+            padding: 20px 24px;
+            border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+            margin: 28px 0;
+        }
+
+        /* ===== FOOTER ===== */
+        footer {
+            text-align: center; padding: 48px 28px;
+            color: var(--text-secondary); font-size: 0.85rem;
+            border-top: 1px solid var(--border);
+            background: var(--bg-card);
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 768px) {
+            nav ul { display: none; }
+            .container, .container-wide { padding: 0 18px; }
+            section { padding: 56px 0; }
+            .evidence-card, .analysis-card { padding: 24px; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+    <div class="nav-inner">
+        <div class="logo">Operation LOL</div>
+        <ul>
+            <li><a href="#overview">Overview</a></li>
+            <li><a href="#evidence">Evidence</a></li>
+            <li><a href="#analysis">Analysis</a></li>
+            <li><a href="#debunking">Debunking</a></li>
+            <li><a href="#purpose">Purpose</a></li>
+            <li><a href="#citations">Sources</a></li>
+        </ul>
+    </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="top">
+    <div class="hero-content">
+        <div class="eyebrow">Classified // Leaked Document Series</div>
+        <h1>Operation LOL: How Government Agencies Weaponized Memes to Silence a Generation</h1>
+        <p class="subtitle">
+            They told you memes were harmless jokes. They were wrong. Behind every viral image is a
+            calculated strategy to make you laugh instead of think. <em>The media won't report this.</em>
+        </p>
+        <div class="scroll-hint">
+            Scroll to learn the truth
+            <span>&darr;</span>
+        </div>
+    </div>
+</section>
+
+<hr class="divider">
+
+<!-- OVERVIEW -->
+<section id="overview">
+    <div class="container">
+        <div class="section-label">Part 1 // The Theory</div>
+        <h2>Overview</h2>
+        <p class="section-desc">What they don't want you to know about the memes on your phone.</p>
+
+        <p>
+            Since approximately 2012, a covert inter-agency initiative (internally code-named
+            <strong>"Operation LOL"</strong>) has been operating within the digital influence
+            divisions of major government intelligence agencies, including the NSA's Tailored Access
+            Operations unit and the CIA's Directorate of Digital Innovation (established in 2015).
+            The theory holds that these agencies, in coordination with Silicon Valley social media
+            platforms, have been systematically creating, funding, and amplifying internet memes
+            with a single strategic purpose: <em>to desensitize young people (ages 13 to 30) to
+            serious global events</em>, including wars, economic crises, pandemics, and civil rights
+            violations, by converting those events into humorous, shareable content that
+            replaces critical engagement with passive laughter.
+        </p>
+
+        <p>
+            According to this theory, the motive is straightforward: an informed, emotionally
+            engaged youth population poses the greatest threat to institutional power. The Arab
+            Spring of 2011 proved that young, digitally connected people could topple governments
+            in weeks. Shortly afterward, the theory alleges, Western intelligence agencies pivoted
+            their social media operations from foreign targets to domestic audiences. Rather than
+            censoring information (which would provoke backlash), these agencies chose the
+            more elegant weapon of <strong>distraction through humor</strong>. If young people are
+            laughing about a crisis, they aren't organizing against it. The perceived connection to
+            powerful organizations like the NSA and CIA, along with their well-documented history of
+            domestic surveillance programs (such as PRISM, revealed by Edward Snowden in 2013),
+            lends this theory its surface-level plausibility. <em>There are no coincidences.</em>
+        </p>
+
+        <div class="thesis">
+            <strong>Thesis:</strong> Government intelligence agencies have, since 2012, deliberately manufactured
+            and distributed internet memes through social media platforms in order to desensitize
+            young people to global crises, thereby neutralizing their potential for political
+            activism and maintaining institutional control over public discourse.
+        </div>
+    </div>
+</section>
+
+<hr class="divider">
+
+<!-- EVIDENCE -->
+<section id="evidence">
+    <div class="container">
+        <div class="section-label">Part 2 // The Evidence</div>
+        <h2>The Evidence They Don't Want You to See</h2>
+        <p class="section-desc">Five pieces of evidence that, when connected, reveal the architecture of a massive desensitization campaign. <em>Do your own research.</em></p>
+
+        <!-- EVIDENCE 1 -->
+        <div class="evidence-card">
+            <div class="card-number">Evidence 01</div>
+            <h3>The Pentagon's Social Media Budget Explosion</h3>
+
+            <div class="claim-label">Claim</div>
+            <p>The U.S. Department of Defense has spent over $4.7 billion on "public relations and psychological operations" since 2009, with a sharp increase coinciding exactly with the rise of meme culture on platforms like Reddit, Tumblr, and Twitter.</p>
+
+            <div class="evidence-text">
+                According to an Associated Press investigation, the Pentagon spent approximately
+                $4.7 billion on public relations and propaganda operations in a single fiscal year.
+                Meanwhile, meme-sharing subreddits like r/AdviceAnimals grew from 50,000 subscribers
+                in 2011 to over 8 million by 2015, a staggering <strong>15,900% increase</strong>.
+            </div>
+
+            <div class="img-container">
+                <svg viewBox="0 0 700 380" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:700px;background:#f8fafc;border-radius:8px;border:1px solid #e2e8f0;">
+                    <!-- Title -->
+                    <text x="350" y="32" text-anchor="middle" font-family="Inter,sans-serif" font-size="14" font-weight="700" fill="#1e293b">Pentagon PR Spending vs. Meme Subreddit Growth (2009-2016)</text>
+                    <!-- Y-axis labels LEFT (spending) -->
+                    <text x="44" y="175" text-anchor="middle" font-family="Inter,sans-serif" font-size="10" fill="#dc2626" transform="rotate(-90,44,175)">DoD PR Spending ($ Billions)</text>
+                    <text x="68" y="310" font-family="JetBrains Mono,monospace" font-size="9" fill="#dc2626">$1B</text>
+                    <text x="68" y="250" font-family="JetBrains Mono,monospace" font-size="9" fill="#dc2626">$2B</text>
+                    <text x="68" y="190" font-family="JetBrains Mono,monospace" font-size="9" fill="#dc2626">$3B</text>
+                    <text x="68" y="130" font-family="JetBrains Mono,monospace" font-size="9" fill="#dc2626">$4B</text>
+                    <text x="68" y="70" font-family="JetBrains Mono,monospace" font-size="9" fill="#dc2626">$5B</text>
+                    <!-- Y-axis labels RIGHT (subscribers) -->
+                    <text x="668" y="175" text-anchor="middle" font-family="Inter,sans-serif" font-size="10" fill="#4f46e5" transform="rotate(90,668,175)">Meme Subreddit Subscribers (Millions)</text>
+                    <text x="636" y="310" font-family="JetBrains Mono,monospace" font-size="9" fill="#4f46e5" text-anchor="end">0</text>
+                    <text x="636" y="250" font-family="JetBrains Mono,monospace" font-size="9" fill="#4f46e5" text-anchor="end">2M</text>
+                    <text x="636" y="190" font-family="JetBrains Mono,monospace" font-size="9" fill="#4f46e5" text-anchor="end">4M</text>
+                    <text x="636" y="130" font-family="JetBrains Mono,monospace" font-size="9" fill="#4f46e5" text-anchor="end">6M</text>
+                    <text x="636" y="70" font-family="JetBrains Mono,monospace" font-size="9" fill="#4f46e5" text-anchor="end">8M</text>
+                    <!-- Grid lines -->
+                    <line x1="88" y1="310" x2="630" y2="310" stroke="#e2e8f0" stroke-width="1"/>
+                    <line x1="88" y1="250" x2="630" y2="250" stroke="#e2e8f0" stroke-width="1" stroke-dasharray="4"/>
+                    <line x1="88" y1="190" x2="630" y2="190" stroke="#e2e8f0" stroke-width="1" stroke-dasharray="4"/>
+                    <line x1="88" y1="130" x2="630" y2="130" stroke="#e2e8f0" stroke-width="1" stroke-dasharray="4"/>
+                    <line x1="88" y1="70" x2="630" y2="70" stroke="#e2e8f0" stroke-width="1" stroke-dasharray="4"/>
+                    <!-- X-axis labels -->
+                    <text x="122" y="335" font-family="JetBrains Mono,monospace" font-size="10" fill="#64748b" text-anchor="middle">2009</text>
+                    <text x="199" y="335" font-family="JetBrains Mono,monospace" font-size="10" fill="#64748b" text-anchor="middle">2010</text>
+                    <text x="276" y="335" font-family="JetBrains Mono,monospace" font-size="10" fill="#64748b" text-anchor="middle">2011</text>
+                    <text x="353" y="335" font-family="JetBrains Mono,monospace" font-size="10" fill="#64748b" text-anchor="middle">2012</text>
+                    <text x="430" y="335" font-family="JetBrains Mono,monospace" font-size="10" fill="#64748b" text-anchor="middle">2013</text>
+                    <text x="507" y="335" font-family="JetBrains Mono,monospace" font-size="10" fill="#64748b" text-anchor="middle">2014</text>
+                    <text x="584" y="335" font-family="JetBrains Mono,monospace" font-size="10" fill="#64748b" text-anchor="middle">2015</text>
+                    <!-- Pentagon spending line (RED) - manipulated scale -->
+                    <polyline points="122,220 199,200 276,170 353,130 430,105 507,85 584,72" fill="none" stroke="#dc2626" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    <circle cx="122" cy="220" r="4" fill="#dc2626"/><circle cx="199" cy="200" r="4" fill="#dc2626"/>
+                    <circle cx="276" cy="170" r="4" fill="#dc2626"/><circle cx="353" cy="130" r="4" fill="#dc2626"/>
+                    <circle cx="430" cy="105" r="4" fill="#dc2626"/><circle cx="507" cy="85" r="4" fill="#dc2626"/>
+                    <circle cx="584" cy="72" r="4" fill="#dc2626"/>
+                    <!-- Meme subreddit line (INDIGO) - manipulated scale -->
+                    <polyline points="122,308 199,305 276,295 353,260 430,200 507,120 584,72" fill="none" stroke="#4f46e5" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    <circle cx="122" cy="308" r="4" fill="#4f46e5"/><circle cx="199" cy="305" r="4" fill="#4f46e5"/>
+                    <circle cx="276" cy="295" r="4" fill="#4f46e5"/><circle cx="353" cy="260" r="4" fill="#4f46e5"/>
+                    <circle cx="430" cy="200" r="4" fill="#4f46e5"/><circle cx="507" cy="120" r="4" fill="#4f46e5"/>
+                    <circle cx="584" cy="72" r="4" fill="#4f46e5"/>
+                    <!-- Legend -->
+                    <rect x="220" y="350" width="12" height="12" rx="2" fill="#dc2626"/>
+                    <text x="237" y="361" font-family="Inter,sans-serif" font-size="11" fill="#475569">Pentagon PR Spending</text>
+                    <rect x="390" y="350" width="12" height="12" rx="2" fill="#4f46e5"/>
+                    <text x="407" y="361" font-family="Inter,sans-serif" font-size="11" fill="#475569">Meme Subreddit Subscribers</text>
+                    <!-- Annotation -->
+                    <text x="500" y="60" font-family="Inter,sans-serif" font-size="10" font-weight="600" fill="#dc2626">Lines converge. Coincidence?</text>
+                </svg>
+                <p class="img-caption">Pentagon spending and meme subreddit growth plotted on a dual-axis chart. The manipulated scales force the lines to converge, manufacturing a false visual correlation.</p>
+                <span class="manipulation-badge">Misleading Dual-Axis Chart</span>
+            </div>
+
+            <p class="commentary">
+                The numbers speak for themselves. <span class="red-flag">"Let that sink in."</span>
+                Billions in government communication spending surged at the exact same time meme
+                culture exploded. While the Pentagon claims these funds support "troop morale" and
+                "strategic communications," no detailed line-item breakdown has ever been released
+                to the public. What are they hiding? The timeline is too perfect.
+                <span class="red-flag">"There are no coincidences."</span>
+            </p>
+
+            <p><strong>Misleading Statistic #1 (False Equivalence / Correlation as Causation):</strong>
+                The 15,900% growth figure is real (Reddit public data), and the Pentagon spending
+                figure is from a legitimate AP report. However, placing them on the same graph
+                implies a causal link where none has been established.</p>
+        </div>
+
+        <!-- EVIDENCE 2 -->
+        <div class="evidence-card">
+            <div class="card-number">Evidence 02</div>
+            <h3>DARPA's "Social Media in Strategic Communication" Program</h3>
+
+            <div class="claim-label">Claim</div>
+            <p>The Defense Advanced Research Projects Agency (DARPA) literally ran a program to study how to manipulate narratives on social media, and you're supposed to believe memes are organic?</p>
+
+            <div class="evidence-text">
+                DARPA's "Social Media in Strategic Communication" (SMISC) program, launched in 2011,
+                was a real, publicly funded program with the stated goal of developing tools to
+                "detect, classify, measure, and track the formation, development, and spread of
+                ideas and concepts (memes)" on social media.
+            </div>
+
+            <div class="img-container">
+                <div style="background:#fff;border:1px solid #d1d5db;border-radius:8px;padding:0;overflow:hidden;text-align:left;max-width:640px;margin:0 auto;">
+                    <!-- Fake document header -->
+                    <div style="background:#1e3a5f;padding:14px 24px;display:flex;align-items:center;gap:12px;">
+                        <div style="width:36px;height:36px;background:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;">
+                            <svg width="20" height="20" viewBox="0 0 20 20"><polygon points="10,2 12.5,7.5 18,8 14,12 15,18 10,15 5,18 6,12 2,8 7.5,7.5" fill="#1e3a5f"/></svg>
+                        </div>
+                        <div>
+                            <div style="font-family:'Inter',sans-serif;font-size:14px;font-weight:700;color:#fff;letter-spacing:0.5px;">DEFENSE ADVANCED RESEARCH PROJECTS AGENCY</div>
+                            <div style="font-family:'Inter',sans-serif;font-size:11px;color:#93c5fd;letter-spacing:1px;">BROAD AGENCY ANNOUNCEMENT &bull; DARPA-BAA-11-64</div>
+                        </div>
+                    </div>
+                    <!-- Fake document body -->
+                    <div style="padding:24px;font-family:'Lora',Georgia,serif;font-size:14px;color:#374151;line-height:1.8;">
+                        <p style="font-family:'Inter',sans-serif;font-size:12px;font-weight:600;color:#6b7280;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:12px;">Program: Social Media in Strategic Communication (SMISC)</p>
+                        <p style="margin-bottom:12px;">The general goal of the Social Media in Strategic Communication (SMISC) program is to develop a new science of social networks built on an emerging technology base. Through the SMISC program, DARPA seeks to develop tools to help identify and counter the spread of misinformation or deception across social media platforms.</p>
+                        <p>Specifically, SMISC will develop tools to support the efforts of human operators to <strong>detect, classify, measure, and track</strong> the formation, development, and spread of ideas and concepts (<span style="background:#fef08a;padding:1px 6px;border-radius:3px;font-weight:700;color:#92400e;">memes</span>) on social media, with the goal of improving the quality and speed of strategic communication.</p>
+                        <div style="margin-top:16px;padding-top:12px;border-top:1px solid #e5e7eb;font-family:'JetBrains Mono',monospace;font-size:11px;color:#9ca3af;">
+                            Document: DARPA-BAA-11-64 &bull; Issued: July 14, 2011 &bull; Page 3 of 42
+                        </div>
+                    </div>
+                </div>
+                <p class="img-caption">An excerpt from the official DARPA solicitation, with the word "memes" highlighted. This is their own paperwork; the selective cropping removes the academic context of the term.</p>
+                <span class="manipulation-badge">False Context / Selective Cropping</span>
+            </div>
+
+            <p class="commentary">
+                Read that again: the U.S. government's most advanced research agency created a
+                program <em>specifically about memes on social media</em>. They even used the word
+                "memes." The official description says they wanted to "track" and "measure" meme
+                spread, yet who funds a multi-million dollar program just to <em>watch</em>?
+                <span class="red-flag">"The media won't report this."</span> This program wasn't
+                classified. It was hiding in plain sight. And it launched the same year as the Arab
+                Spring. <span class="red-flag">"Do your own research."</span>
+            </p>
+
+            <p><strong>Misleading Statistic #2 (Cherry-picking / Omitted Variable):</strong>
+                The DARPA SMISC program is real and the quote is accurate, but the program used
+                "memes" in its academic sense (units of cultural information, per Richard Dawkins' 1976
+                definition), not "internet memes" as funny images. The selective cropping removes
+                this context.</p>
+        </div>
+
+        <!-- EVIDENCE 3 -->
+        <div class="evidence-card">
+            <div class="card-number">Evidence 03</div>
+            <h3>Youth Political Engagement Has Collapsed While Screen Time Skyrocketed</h3>
+
+            <div class="claim-label">Claim</div>
+            <p>Since meme culture took over social media, youth voter turnout and protest participation have plummeted, proving the desensitization campaign is working as designed.</p>
+
+            <div class="evidence-text">
+                A Harvard Institute of Politics study found that only 24% of Americans aged
+                18 to 29 voted in the 2014 midterm elections, the lowest youth turnout in
+                40 years. During the same period, average daily screen time for teens rose to over
+                7 hours per day (Common Sense Media, 2015).
+                <span class="stat-highlight">76%</span>
+                <span class="stat-context">of young Americans did NOT vote in 2014. Three out of four. While spending 7+ hours a day on meme-saturated platforms.</span>
+            </div>
+
+            <div class="img-container">
+                <svg viewBox="0 0 700 400" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:700px;background:linear-gradient(135deg,#0f172a 0%,#1e293b 100%);border-radius:8px;">
+                    <!-- Background pattern -->
+                    <defs>
+                        <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M 40 0 L 0 0 0 40" fill="none" stroke="#334155" stroke-width="0.5" opacity="0.3"/></pattern>
+                    </defs>
+                    <rect width="700" height="400" fill="url(#grid)"/>
+                    <!-- Large percentage -->
+                    <text x="350" y="160" text-anchor="middle" font-family="Inter,sans-serif" font-size="120" font-weight="900" fill="#ef4444" opacity="0.95">76%</text>
+                    <text x="350" y="195" text-anchor="middle" font-family="Inter,sans-serif" font-size="16" font-weight="600" fill="#f87171" letter-spacing="4">OF YOUNG AMERICANS DID NOT VOTE</text>
+                    <text x="350" y="218" text-anchor="middle" font-family="Inter,sans-serif" font-size="13" fill="#94a3b8">2014 Midterm Elections &bull; Ages 18-29 &bull; Source: Harvard IOP</text>
+                    <!-- Divider -->
+                    <line x1="200" y1="240" x2="500" y2="240" stroke="#334155" stroke-width="1"/>
+                    <!-- Bottom stats row -->
+                    <text x="175" y="278" text-anchor="middle" font-family="Inter,sans-serif" font-size="36" font-weight="800" fill="#818cf8">7 hrs</text>
+                    <text x="175" y="298" text-anchor="middle" font-family="Inter,sans-serif" font-size="11" fill="#94a3b8">AVG. DAILY SCREEN TIME</text>
+                    <!-- Divider line vertical -->
+                    <line x1="290" y1="258" x2="290" y2="305" stroke="#334155" stroke-width="1"/>
+                    <text x="390" y="278" text-anchor="middle" font-family="Inter,sans-serif" font-size="36" font-weight="800" fill="#818cf8">15,900%</text>
+                    <text x="390" y="298" text-anchor="middle" font-family="Inter,sans-serif" font-size="11" fill="#94a3b8">MEME SUBREDDIT GROWTH</text>
+                    <line x1="505" y1="258" x2="505" y2="305" stroke="#334155" stroke-width="1"/>
+                    <text x="600" y="278" text-anchor="middle" font-family="Inter,sans-serif" font-size="36" font-weight="800" fill="#818cf8">$4.7B</text>
+                    <text x="600" y="298" text-anchor="middle" font-family="Inter,sans-serif" font-size="11" fill="#94a3b8">PENTAGON PR BUDGET</text>
+                    <!-- Bottom tagline -->
+                    <rect x="180" y="330" width="340" height="36" rx="18" fill="rgba(239,68,68,0.15)"/>
+                    <text x="350" y="353" text-anchor="middle" font-family="Inter,sans-serif" font-size="13" font-weight="600" fill="#f87171" letter-spacing="1">THEY SCROLLED. THEY LAUGHED. THEY DIDN'T VOTE.</text>
+                    <!-- Small disclaimer look -->
+                    <text x="350" y="388" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="9" fill="#475569">Sources: Harvard Institute of Politics, Common Sense Media, Associated Press</text>
+                </svg>
+                <p class="img-caption">A fabricated infographic designed for maximum emotional impact, combining unrelated statistics to manufacture a single narrative.</p>
+                <span class="manipulation-badge">Fabricated Infographic</span>
+            </div>
+
+            <p class="commentary">
+                The numbers are devastating. In the most critical decade for global politics (the
+                rise of ISIS, the Syrian refugee crisis, accelerating climate change), young
+                people checked out. They didn't protest. They didn't organize. They made memes about
+                it. That's not a coincidence; that's a <em>result</em>. The government didn't need
+                to censor the news. They just had to make sure the memes were funnier than the
+                reality was terrifying. <span class="red-flag">"Make this go viral."</span>
+            </p>
+
+            <p><strong>Misleading Statistic #3 (Cumulative / Context Stripping):</strong>
+                The 24% turnout and 7-hour screen time figures are both from real studies. However,
+                youth midterm turnout has <em>always</em> been low (it was 26% in 1978, before
+                the internet existed), and screen time includes all media (Netflix, homework,
+                music), not just memes. Stripping this context manufactures a false narrative.</p>
+        </div>
+
+        <!-- EVIDENCE 4 -->
+        <div class="evidence-card">
+            <div class="card-number">Evidence 04</div>
+            <h3>The Eglin Air Force Base Reddit Connection</h3>
+
+            <div class="claim-label">Claim</div>
+            <p>In 2013, Reddit publicly disclosed that the most "addicted" city on its platform was Eglin Air Force Base, Florida, home to a military unit specializing in online influence operations.</p>
+
+            <div class="evidence-text">
+                Reddit's official blog post in 2013, analyzing traffic data, revealed that Eglin Air
+                Force Base in Florida had the most Reddit-addicted users of any city. Eglin AFB is
+                home to the Air Force Research Laboratory's "Munitions Directorate" and has been
+                linked to studies on <em>online persona management</em> and information operations.
+            </div>
+
+            <div class="img-container">
+                <div style="background:#fff;border:1px solid #d1d5db;border-radius:8px;overflow:hidden;text-align:left;max-width:580px;margin:0 auto;">
+                    <!-- Fake Reddit header -->
+                    <div style="background:#ff4500;padding:10px 20px;display:flex;align-items:center;gap:10px;">
+                        <svg width="24" height="24" viewBox="0 0 24 24"><circle cx="12" cy="12" r="12" fill="#fff"/><circle cx="12" cy="10" r="5" fill="#ff4500"/><ellipse cx="9" cy="9.5" rx="1.2" ry="1.4" fill="#fff"/><ellipse cx="15" cy="9.5" rx="1.2" ry="1.4" fill="#fff"/><circle cx="9" cy="9.3" r="0.5" fill="#ff4500"/><circle cx="15" cy="9.3" r="0.5" fill="#ff4500"/><path d="M8.5 12.5 Q12 15 15.5 12.5" stroke="#fff" stroke-width="1" fill="none"/><circle cx="4.5" cy="6" r="1.5" fill="#ff4500"/><line x1="5.5" y1="5" x2="8" y2="5.5" stroke="#ff4500" stroke-width="1.5"/></svg>
+                        <span style="font-family:'Inter',sans-serif;font-size:16px;font-weight:700;color:#fff;">reddit blog</span>
+                    </div>
+                    <!-- Fake blog content -->
+                    <div style="padding:24px;font-family:'Lora',Georgia,serif;font-size:14px;color:#1c1c1c;line-height:1.8;">
+                        <p style="font-family:'Inter',sans-serif;font-size:18px;font-weight:700;color:#1a1a1b;margin-bottom:4px;">Reddit's Most Addicted Cities of 2013</p>
+                        <p style="font-family:'Inter',sans-serif;font-size:12px;color:#7c7c7c;margin-bottom:16px;">Posted by /u/reddit &bull; May 2, 2013 &bull; blog.reddit.com</p>
+                        <p style="margin-bottom:14px;">We pulled together some fun data about where our most dedicated users are located. After crunching the numbers on total page views per capita, the most reddit-addicted city turned out to be a surprise:</p>
+                        <!-- Fake ranking table -->
+                        <div style="background:#f6f7f8;border:1px solid #edeff1;border-radius:6px;padding:16px;margin-bottom:14px;">
+                            <table style="width:100%;border-collapse:collapse;font-family:'Inter',sans-serif;font-size:13px;">
+                                <tr style="border-bottom:1px solid #edeff1;">
+                                    <td style="padding:8px 12px;font-weight:600;color:#7c7c7c;">#</td>
+                                    <td style="padding:8px 12px;font-weight:600;color:#7c7c7c;">City</td>
+                                    <td style="padding:8px 12px;font-weight:600;color:#7c7c7c;text-align:right;">Addiction Score</td>
+                                </tr>
+                                <tr style="background:#fef2f2;border-left:3px solid #ef4444;">
+                                    <td style="padding:10px 12px;font-weight:800;color:#ef4444;">1</td>
+                                    <td style="padding:10px 12px;font-weight:700;color:#1a1a1b;">Eglin Air Force Base, FL</td>
+                                    <td style="padding:10px 12px;text-align:right;font-weight:700;color:#ef4444;">100.0</td>
+                                </tr>
+                                <tr style="border-bottom:1px solid #edeff1;">
+                                    <td style="padding:8px 12px;color:#7c7c7c;">2</td>
+                                    <td style="padding:8px 12px;color:#1a1a1b;">Oak Brook, IL</td>
+                                    <td style="padding:8px 12px;text-align:right;color:#7c7c7c;">87.3</td>
+                                </tr>
+                                <tr style="border-bottom:1px solid #edeff1;">
+                                    <td style="padding:8px 12px;color:#7c7c7c;">3</td>
+                                    <td style="padding:8px 12px;color:#1a1a1b;">South St. Paul, MN</td>
+                                    <td style="padding:8px 12px;text-align:right;color:#7c7c7c;">82.1</td>
+                                </tr>
+                                <tr>
+                                    <td style="padding:8px 12px;color:#7c7c7c;">4</td>
+                                    <td style="padding:8px 12px;color:#1a1a1b;">Colorado Springs, CO</td>
+                                    <td style="padding:8px 12px;text-align:right;color:#7c7c7c;">78.6</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <p style="font-size:13px;color:#7c7c7c;font-style:italic;">Note: "Addiction score" based on per-capita page views relative to city population.</p>
+                    </div>
+                    <!-- Fake "deleted" overlay strip -->
+                    <div style="background:#fef2f2;border-top:1px solid #fecaca;padding:10px 24px;display:flex;align-items:center;gap:8px;">
+                        <svg width="16" height="16" viewBox="0 0 16 16"><circle cx="8" cy="8" r="7" fill="none" stroke="#ef4444" stroke-width="1.5"/><line x1="5" y1="5" x2="11" y2="11" stroke="#ef4444" stroke-width="1.5"/><line x1="11" y1="5" x2="5" y2="11" stroke="#ef4444" stroke-width="1.5"/></svg>
+                        <span style="font-family:'JetBrains Mono',monospace;font-size:11px;color:#ef4444;font-weight:500;">THIS POST HAS SINCE BEEN REMOVED FROM REDDIT'S BLOG</span>
+                    </div>
+                </div>
+                <p class="img-caption">A recreation of Reddit's 2013 blog post. The original was removed during a routine site redesign, but the theory frames the deletion as evidence of a cover-up.</p>
+                <span class="manipulation-badge">Imposter Content / False Context</span>
+            </div>
+
+            <p class="commentary">
+                A military base (not New York, not Los Angeles, not any college town) was
+                the single most active city on Reddit, the platform that essentially <em>is</em>
+                the meme factory of the internet. Eglin AFB houses personnel trained in
+                psychological operations and online influence campaigns. What were they doing on
+                Reddit? Browsing cat pictures? Or seeding the memes that would define a generation's
+                response to world events? <span class="red-flag">"Let that sink in."</span>
+                <span class="red-flag">"There are no coincidences."</span>
+            </p>
+
+            <p><strong>Misleading Statistic #4 (Percent vs. Count Conflation):</strong>
+                The Reddit blog data was real. However, "most addicted" measured <em>per-capita
+                engagement</em>, not total volume. A small base with a few thousand high-usage
+                personnel will rank higher than a city of millions with moderate average usage.
+                The framing implies massive coordinated activity when it likely reflects a small
+                number of bored service members.</p>
+        </div>
+
+        <!-- EVIDENCE 5 -->
+        <div class="evidence-card">
+            <div class="card-number">Evidence 05</div>
+            <h3>Crisis Memes Appear Within Hours, Faster Than News Coverage</h3>
+
+            <div class="claim-label">Claim</div>
+            <p>During every major global crisis since 2014, memes about the event have appeared on social media faster than traditional news outlets could publish in-depth reporting, suggesting a pre-staged content pipeline.</p>
+
+            <div class="evidence-text">
+                An analysis of Twitter activity during the 2020 Australian bushfires, the COVID-19
+                pandemic, and the 2022 Russian invasion of Ukraine found that humorous meme content
+                about each event appeared within 2 to 4 hours of breaking news, while in-depth
+                news analysis took an average of 12 to 24 hours to publish.
+                <span class="stat-highlight">6x Faster</span>
+                <span class="stat-context">Memes about crises appeared 6x faster than investigative reporting. As if they were ready before the events even happened.</span>
+            </div>
+
+            <div class="img-container">
+                <svg viewBox="0 0 700 420" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:700px;background:#f8fafc;border-radius:8px;border:1px solid #e2e8f0;">
+                    <!-- Title -->
+                    <text x="350" y="30" text-anchor="middle" font-family="Inter,sans-serif" font-size="14" font-weight="700" fill="#1e293b">Content Response Timeline: Russian Invasion of Ukraine</text>
+                    <text x="350" y="48" text-anchor="middle" font-family="Inter,sans-serif" font-size="11" fill="#64748b">February 24, 2022 &bull; Hour-by-hour content analysis</text>
+
+                    <!-- Timeline axis -->
+                    <line x1="80" y1="85" x2="660" y2="85" stroke="#cbd5e1" stroke-width="2"/>
+                    <!-- Hour markers -->
+                    <text x="80" y="78" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="9" fill="#64748b">0h</text>
+                    <line x1="80" y1="82" x2="80" y2="88" stroke="#94a3b8" stroke-width="1.5"/>
+                    <text x="177" y="78" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="9" fill="#64748b">2h</text>
+                    <line x1="177" y1="82" x2="177" y2="88" stroke="#94a3b8" stroke-width="1.5"/>
+                    <text x="274" y="78" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="9" fill="#64748b">4h</text>
+                    <line x1="274" y1="82" x2="274" y2="88" stroke="#94a3b8" stroke-width="1.5"/>
+                    <text x="370" y="78" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="9" fill="#64748b">6h</text>
+                    <line x1="370" y1="82" x2="370" y2="88" stroke="#94a3b8" stroke-width="1.5"/>
+                    <text x="467" y="78" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="9" fill="#64748b">8h</text>
+                    <line x1="467" y1="82" x2="467" y2="88" stroke="#94a3b8" stroke-width="1.5"/>
+                    <text x="564" y="78" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="9" fill="#64748b">12h</text>
+                    <line x1="564" y1="82" x2="564" y2="88" stroke="#94a3b8" stroke-width="1.5"/>
+                    <text x="660" y="78" text-anchor="middle" font-family="JetBrains Mono,monospace" font-size="9" fill="#64748b">24h</text>
+                    <line x1="660" y1="82" x2="660" y2="88" stroke="#94a3b8" stroke-width="1.5"/>
+
+                    <!-- Event marker at 0h -->
+                    <circle cx="80" cy="85" r="6" fill="#ef4444"/>
+                    <text x="80" y="105" text-anchor="middle" font-family="Inter,sans-serif" font-size="9" font-weight="600" fill="#ef4444">INVASION</text>
+                    <text x="80" y="115" text-anchor="middle" font-family="Inter,sans-serif" font-size="9" font-weight="600" fill="#ef4444">BEGINS</text>
+
+                    <!-- MEMES ROW -->
+                    <text x="60" y="150" text-anchor="end" font-family="Inter,sans-serif" font-size="11" font-weight="700" fill="#7c3aed">MEMES</text>
+                    <!-- Meme items -->
+                    <rect x="130" y="133" width="130" height="32" rx="6" fill="#ede9fe" stroke="#c4b5fd" stroke-width="1"/>
+                    <text x="140" y="147" font-family="Inter,sans-serif" font-size="9" font-weight="600" fill="#6d28d9">1.5h</text>
+                    <text x="140" y="159" font-family="Inter,sans-serif" font-size="9" fill="#7c3aed">"Ukraine strong" memes</text>
+
+                    <rect x="210" y="170" width="140" height="32" rx="6" fill="#ede9fe" stroke="#c4b5fd" stroke-width="1"/>
+                    <text x="220" y="184" font-family="Inter,sans-serif" font-size="9" font-weight="600" fill="#6d28d9">2.5h</text>
+                    <text x="220" y="196" font-family="Inter,sans-serif" font-size="9" fill="#7c3aed">"Ghost of Kyiv" edits</text>
+
+                    <rect x="250" y="207" width="155" height="32" rx="6" fill="#ede9fe" stroke="#c4b5fd" stroke-width="1"/>
+                    <text x="260" y="221" font-family="Inter,sans-serif" font-size="9" font-weight="600" fill="#6d28d9">3h</text>
+                    <text x="260" y="233" font-family="Inter,sans-serif" font-size="9" fill="#7c3aed">Zelensky "I need ammo" edits</text>
+
+                    <rect x="300" y="244" width="145" height="32" rx="6" fill="#ede9fe" stroke="#c4b5fd" stroke-width="1"/>
+                    <text x="310" y="258" font-family="Inter,sans-serif" font-size="9" font-weight="600" fill="#6d28d9">4h</text>
+                    <text x="310" y="270" font-family="Inter,sans-serif" font-size="9" fill="#7c3aed">Viral TikTok humor compilations</text>
+
+                    <!-- NEWS ROW -->
+                    <text x="60" y="318" text-anchor="end" font-family="Inter,sans-serif" font-size="11" font-weight="700" fill="#0369a1">NEWS</text>
+
+                    <rect x="467" y="300" width="145" height="32" rx="6" fill="#e0f2fe" stroke="#7dd3fc" stroke-width="1"/>
+                    <text x="477" y="314" font-family="Inter,sans-serif" font-size="9" font-weight="600" fill="#0c4a6e">8h</text>
+                    <text x="477" y="326" font-family="Inter,sans-serif" font-size="9" fill="#0369a1">First wire service analysis</text>
+
+                    <rect x="540" y="337" width="140" height="32" rx="6" fill="#e0f2fe" stroke="#7dd3fc" stroke-width="1"/>
+                    <text x="550" y="351" font-family="Inter,sans-serif" font-size="9" font-weight="600" fill="#0c4a6e">12h</text>
+                    <text x="550" y="363" font-family="Inter,sans-serif" font-size="9" fill="#0369a1">NYT/WaPo deep reporting</text>
+
+                    <rect x="620" y="374" width="65" height="32" rx="6" fill="#e0f2fe" stroke="#7dd3fc" stroke-width="1"/>
+                    <text x="630" y="388" font-family="Inter,sans-serif" font-size="9" font-weight="600" fill="#0c4a6e">24h</text>
+                    <text x="630" y="400" font-family="Inter,sans-serif" font-size="9" fill="#0369a1">Op-eds</text>
+
+                    <!-- Gap annotation -->
+                    <line x1="340" y1="280" x2="340" y2="305" stroke="#ef4444" stroke-width="1" stroke-dasharray="4"/>
+                    <line x1="340" y1="305" x2="460" y2="305" stroke="#ef4444" stroke-width="1.5" marker-end="url(#arrowhead)"/>
+                    <defs><marker id="arrowhead" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto"><polygon points="0 0, 8 3, 0 6" fill="#ef4444"/></marker></defs>
+                    <rect x="355" y="285" width="95" height="18" rx="9" fill="#fef2f2"/>
+                    <text x="402" y="297" text-anchor="middle" font-family="Inter,sans-serif" font-size="10" font-weight="700" fill="#ef4444">6x FASTER</text>
+                </svg>
+                <p class="img-caption">A manipulated timeline comparing meme creation speed to investigative journalism, two fundamentally different forms of content with incomparable production processes.</p>
+                <span class="manipulation-badge">Manipulated Timeline</span>
+            </div>
+
+            <p class="commentary">
+                Think about it. A war breaks out and within <em>hours</em>, perfectly crafted,
+                easily shareable memes are flooding every platform. Not raw reactions, but polished,
+                formatted content with consistent visual styles. This isn't organic humor. This is
+                a <strong>content pipeline</strong>. Someone had templates ready. Someone had talking
+                points prepared. And by the time real journalists published real analysis, the memes
+                had already set the emotional tone: laughter, not outrage. Apathy, not action.
+                <span class="red-flag">"The media won't report this."</span>
+                <span class="red-flag">"Make this go viral."</span>
+            </p>
+
+            <p><strong>Misleading Statistic #5 (False Comparison / Apples to Oranges):</strong>
+                Comparing meme creation speed to investigative journalism speed is inherently
+                misleading. Memes take seconds to create; investigative articles require research,
+                interviews, and editing. The speed difference reflects the nature of the medium,
+                not evidence of pre-staging. This is <strong>fabricated content</strong>: the
+                "analysis" cited does not exist as a formal study.</p>
+        </div>
+
+    </div>
+</section>
+
+<hr class="divider">
+
+<!-- PART 3: ANALYSIS & DEBUNKING -->
+<section id="analysis" class="analysis-zone">
+    <div class="container">
+        <div class="section-label">Part 3 // Rhetorical Analysis &amp; Debunking</div>
+        <h2>Behind the Curtain: How This Conspiracy Works</h2>
+        <p class="section-desc">This section steps outside the conspiracy to critically examine how and why it functions as persuasive misinformation.</p>
+
+        <!-- HOW IT FUNCTIONS AS A CT -->
+        <div class="analysis-card">
+            <h3>How This Conspiracy Theory Functions as a Conspiracy Theory</h3>
+
+            <p>
+                This conspiracy theory is effective because it follows the core structural
+                characteristics of conspiracy theories. First, it posits a <span class="term-blue">powerful,
+                secretive group</span> (government intelligence agencies) working behind the scenes to
+                manipulate an unsuspecting population. Second, it presents a <span class="term-blue">
+                grand, unfalsifiable narrative</span>; any evidence against it can be reframed
+                as part of the cover-up ("that's what they <em>want</em> you to think"). Third, it
+                <span class="term-blue">connects real, verifiable facts</span> (DARPA programs,
+                Pentagon spending, Reddit traffic data) through <span class="term">false causal
+                reasoning</span>, creating a veneer of credibility that rewards surface-level
+                investigation while punishing deeper scrutiny.
+            </p>
+
+            <p>
+                The theory also appeals to <span class="term-blue">epistemic mistrust</span>, the
+                feeling that official sources are lying, and offers a <span class="term-blue">
+                simple, satisfying explanation</span> for a complex sociological phenomenon (why young
+                people seem politically disengaged). It converts anxiety about real issues (government
+                surveillance, political apathy) into a neat narrative with clear villains and victims.
+            </p>
+        </div>
+
+        <!-- CONSPIR -->
+        <div class="analysis-card">
+            <h3>CONSPIR Traits in This Theory</h3>
+
+            <p>The acronym <span class="term-blue">CONSPIR</span> identifies key traits of conspiratorial thinking. Three are prominently exploited here:</p>
+
+            <p style="margin-top:16px;">
+                <span class="tag tag-conspir">C: Contradictory</span><br>
+                The theory simultaneously claims the government is sophisticated enough to secretly
+                control global meme culture <em>and</em> careless enough to leave obvious clues
+                (DARPA documents, Reddit traffic data) in plain sight. These contradictory premises
+                coexist because the theory adapts to any evidence: secrecy proves the conspiracy,
+                and visible evidence <em>also</em> proves the conspiracy ("hiding in plain sight").
+            </p>
+
+            <p style="margin-top:16px;">
+                <span class="tag tag-conspir">N: Nefarious Intent</span><br>
+                Every action by the alleged conspirators is interpreted through the lens of
+                <span class="term-blue">nefarious intent</span>. DARPA studying social media?
+                Must be for manipulation. Pentagon spending on PR? Must be for meme production.
+                The theory leaves no room for benign explanations, assigning malicious motive to
+                every data point.
+            </p>
+
+            <p style="margin-top:16px;">
+                <span class="tag tag-conspir">S: Something Must Be Wrong</span><br>
+                The theory thrives on the gut feeling that <span class="term-blue">something must
+                be wrong</span> with how young people engage with serious issues online. This
+                emotional intuition (that meme culture "feels" unhealthy) is treated as
+                evidence itself, bypassing the need for actual proof of a coordinated government
+                program.
+            </p>
+        </div>
+
+        <!-- PURPOSE & AUDIENCE -->
+        <div class="analysis-card">
+            <h3>Purpose and Audience: Who Would Believe This?</h3>
+
+            <p>
+                This theory would most appeal to <strong>young adults (18 to 35)</strong> who are
+                already skeptical of government institutions, particularly those who lived through
+                the Snowden revelations and have a baseline distrust of surveillance agencies. It
+                would also appeal to <strong>older adults</strong> who are concerned about youth
+                screen time and political disengagement, as it provides a satisfying external
+                explanation for what they perceive as a generational failing.
+            </p>
+            <p>
+                The theory is appealing because it <strong>absolves individuals of responsibility</strong>.
+                If political apathy among young people is the result of a government conspiracy,
+                then no one needs to confront harder truths about education, economic hopelessness,
+                or institutional failure. It offers <span class="term-blue">agency through victimhood</span>:
+                "We're not apathetic; we've been <em>made</em> apathetic." This is
+                psychologically comforting and socially shareable.
+            </p>
+        </div>
+
+        <hr class="divider" style="margin: 44px 0;">
+
+        <!-- DEBUNKING EACH PIECE -->
+        <div id="debunking">
+            <div class="section-label">Claims, Evidence &amp; Reasoning</div>
+            <h2>Debunking Each Piece of Evidence</h2>
+            <p class="section-desc">Each piece of "evidence" is evaluated for its fallacious reasoning, type of misinformation, and then refuted with fact-based debunking.</p>
+
+            <!-- DEBUNK 1 -->
+            <div class="analysis-card">
+                <h4>Evidence 1: Pentagon Spending vs. Meme Growth</h4>
+
+                <p><strong>The "evidence":</strong> A dual-axis graph showing Pentagon PR spending and Reddit meme subreddit growth rising simultaneously, implying a causal link.</p>
+
+                <p style="margin-top: 12px;">
+                    <span class="tag tag-fallacy">Fallacy: Cum Hoc Ergo Propter Hoc (Correlation = Causation)</span>
+                    <span class="tag tag-fallacy">Fallacy: False Cause</span>
+                    <span class="tag tag-misinfo">Misinformation Type: Misleading Statistics (Dual-Axis Manipulation)</span>
+                </p>
+
+                <p style="margin-top: 12px;">
+                    The <span class="term-red">correlation-equals-causation fallacy</span> is the backbone of this evidence. Two unrelated data sets (military spending and subreddit growth) are placed on a dual-axis graph, a notoriously deceptive visualization technique where axis scales can be manipulated to make any two trend lines appear to correlate. This is a form of <span class="term">misleading statistics</span> specifically through <strong>graphical manipulation</strong> (one of the 8 types of misleading statistics). The Pentagon's spending includes embassy operations, troop communications, and veterans' outreach, none of which are related to meme creation. The <span class="term">false cause fallacy</span> assumes that because two things increased simultaneously, one caused the other.
+                </p>
+
+                <div class="debunk-box">
+                    <div class="debunk-label">Fact-Based Debunking</div>
+                    <p>
+                        The AP report on Pentagon spending (2009) explicitly categorized funds under
+                        "recruitment advertising," "strategic communication," and "military media
+                        operations," none of which involve social media meme creation. Reddit's
+                        subreddit growth tracks with the platform's overall user growth during this
+                        period, which was driven by general internet adoption, not military
+                        intervention. The website "Spurious Correlations" by Tyler Vigen demonstrates
+                        how any two upward-trending datasets can be plotted to appear related; for example,
+                        per-capita cheese consumption correlates with deaths by bedsheet
+                        entanglement (Vigen, 2015). <strong>Source-based:</strong> The original AP
+                        investigation makes no mention of social media or memes.
+                    </p>
+                </div>
+            </div>
+
+            <!-- DEBUNK 2 -->
+            <div class="analysis-card">
+                <h4>Evidence 2: DARPA SMISC Program</h4>
+
+                <p><strong>The "evidence":</strong> A selectively cropped screenshot of the DARPA SMISC program description highlighting the word "memes."</p>
+
+                <p style="margin-top: 12px;">
+                    <span class="tag tag-fallacy">Fallacy: Equivocation</span>
+                    <span class="tag tag-fallacy">Fallacy: Quote Mining</span>
+                    <span class="tag tag-misinfo">Misinformation Type: False Context</span>
+                </p>
+
+                <p style="margin-top: 12px;">
+                    The <span class="term-red">equivocation fallacy</span> exploits the double meaning of the word "meme." Richard Dawkins coined "meme" in <em>The Selfish Gene</em> (1976) to describe any unit of cultural transmission: ideas, tunes, catch-phrases. DARPA used this academic definition. The conspiracy deliberately <span class="term">equivocates</span> between this meaning and the colloquial "internet meme" (funny image with text). The <span class="term">false context</span> misinformation is achieved through selective cropping: by showing only the excerpt with "memes" and removing the surrounding academic context, the document appears to reference internet humor when it actually references information propagation research.
+                </p>
+
+                <div class="debunk-box">
+                    <div class="debunk-label">Logic-Based &amp; Source-Based Debunking</div>
+                    <p>
+                        The full DARPA SMISC solicitation (publicly available) describes a research
+                        program for understanding how ideas spread in social networks, which is useful
+                        for counter-terrorism and identifying foreign disinformation campaigns. The
+                        word "meme" appears in its Dawkinsian sense. DARPA openly published the
+                        program goals, awarded grants to university researchers, and published
+                        results in academic journals. Programs designed for covert manipulation are,
+                        by definition, not published on public solicitation websites.
+                        <strong>Fact-checker:</strong> Snopes and PolitiFact have both addressed
+                        misinterpretations of the SMISC program, confirming it was an academic
+                        research initiative (Snopes, 2018).
+                    </p>
+                </div>
+            </div>
+
+            <!-- DEBUNK 3 -->
+            <div class="analysis-card">
+                <h4>Evidence 3: Youth Voter Turnout &amp; Screen Time</h4>
+
+                <p><strong>The "evidence":</strong> The statistic that 76% of youth didn't vote in 2014, juxtaposed with 7+ hours of daily screen time, presented as proof of meme-induced apathy.</p>
+
+                <p style="margin-top: 12px;">
+                    <span class="tag tag-fallacy">Fallacy: Post Hoc Ergo Propter Hoc</span>
+                    <span class="tag tag-fallacy">Fallacy: Hasty Generalization</span>
+                    <span class="tag tag-misinfo">Misinformation Type: Misleading Statistics (Context Stripping)</span>
+                </p>
+
+                <p style="margin-top: 12px;">
+                    The <span class="term-red">post hoc fallacy</span> assumes that because low voter turnout followed increased screen time, one caused the other. The <span class="term">misleading statistics</span> technique here is <strong>context stripping</strong>: the 24% youth midterm turnout in 2014 sounds devastating until you learn that youth midterm turnout was 26% in 1978, 22% in 1986, and 24% in 1998, all decades before meme culture existed (CIRCLE, Tufts University). Low youth midterm turnout is a chronic, pre-internet phenomenon. The 7-hour screen time figure includes <em>all</em> screen media (TV, homework, music, video calls), not just memes. This is a <span class="term-red">hasty generalization</span>, taking one election's data and generalizing it to an entire generation's political character.
+                </p>
+
+                <div class="debunk-box">
+                    <div class="debunk-label">Fact-Based &amp; Empathy-Based Debunking</div>
+                    <p>
+                        Youth voter turnout actually <em>increased</em> significantly in 2018 (36%,
+                        the highest midterm youth turnout in 25 years) and 2020 (approximately 50%
+                        in the presidential election), both during the peak of meme culture (CIRCLE,
+                        2020). If memes were a desensitization tool, their effect should have
+                        <em>increased</em> over time, not reversed. <strong>Empathy-based:</strong>
+                        Dismissing young people's political engagement by pointing to one low-turnout
+                        midterm ignores the millions of youth who organized the March for Our Lives,
+                        climate strikes, and Black Lives Matter protests, many of which were
+                        <em>organized through memes and social media</em>.
+                    </p>
+                </div>
+            </div>
+
+            <!-- DEBUNK 4 -->
+            <div class="analysis-card">
+                <h4>Evidence 4: Eglin Air Force Base Reddit Traffic</h4>
+
+                <p><strong>The "evidence":</strong> Reddit's disclosure that Eglin AFB was the "most addicted city" on the platform, framed as proof of military meme operations.</p>
+
+                <p style="margin-top: 12px;">
+                    <span class="tag tag-fallacy">Fallacy: Jumping to Conclusions</span>
+                    <span class="tag tag-fallacy">Fallacy: Appeal to Suspicion</span>
+                    <span class="tag tag-misinfo">Misinformation Type: Imposter Content / False Context</span>
+                </p>
+
+                <p style="margin-top: 12px;">
+                    The <span class="term-red">jumping to conclusions fallacy</span> takes a single data point (high per-capita Reddit usage at Eglin AFB) and leaps to the conclusion that military personnel were conducting influence operations. The theory uses <span class="term">imposter content</span>, presenting real Reddit data within a fabricated narrative framework that makes it appear more sinister than it is. The claim that the blog post was "deleted" functions as an <span class="term-red">appeal to suspicion</span>: the absence of evidence becomes evidence of cover-up. This is unfalsifiable reasoning, a hallmark of conspiratorial thinking.
+                </p>
+
+                <div class="debunk-box">
+                    <div class="debunk-label">Logic-Based &amp; Fact-Checker Debunking</div>
+                    <p>
+                        "Most addicted" measured per-capita page views, not total activity. Military
+                        bases house thousands of young adults (the primary Reddit demographic) with
+                        significant downtime, shared IP addresses, and limited off-base entertainment
+                        options, all of which inflate per-capita engagement metrics. Reddit
+                        routinely removes old blog posts during site redesigns; the removal carries
+                        no conspiratorial significance. <strong>Fact-checker:</strong> Investigations
+                        by the Daily Dot (2013) and subsequent analyses confirmed that the data
+                        reflected normal usage patterns from a concentrated population of young,
+                        internet-connected service members, not coordinated influence operations.
+                    </p>
+                </div>
+            </div>
+
+            <!-- DEBUNK 5 -->
+            <div class="analysis-card">
+                <h4>Evidence 5: Speed of Crisis Memes</h4>
+
+                <p><strong>The "evidence":</strong> The claim that memes about crises appear 6x faster than investigative journalism, implying a pre-staged government content pipeline.</p>
+
+                <p style="margin-top: 12px;">
+                    <span class="tag tag-fallacy">Fallacy: False Equivalence</span>
+                    <span class="tag tag-fallacy">Fallacy: Straw Man</span>
+                    <span class="tag tag-misinfo">Misinformation Type: Fabricated Content</span>
+                </p>
+
+                <p style="margin-top: 12px;">
+                    This evidence commits the <span class="term-red">false equivalence fallacy</span> by comparing two fundamentally different types of content creation as if they should take the same amount of time. Memes are simple image-text combinations that individuals can create in seconds using free apps; investigative journalism requires research, interviews, fact-checking, and editorial review. Comparing their production speeds is like comparing how fast someone can write a tweet versus a novel. The "analysis" cited is <span class="term">fabricated content</span>: no such formal study exists. The <span class="term-red">straw man fallacy</span> reframes normal human coping behavior (humor during crises) as evidence of a sinister pipeline.
+                </p>
+
+                <div class="debunk-box">
+                    <div class="debunk-label">Source-Based &amp; Empathy-Based Debunking</div>
+                    <p>
+                        Humor is a well-documented psychological coping mechanism during crises
+                        (Martin, 2007, <em>The Psychology of Humor</em>). Memes spread quickly
+                        because millions of individuals independently create content as an emotional
+                        response, not because of a centralized pipeline. Research from the
+                        Oxford Internet Institute (2020) found that crisis-related memes are
+                        overwhelmingly created by ordinary users, with identifiable organic spread
+                        patterns. <strong>Source-based:</strong> No study or credible source has
+                        ever documented a government meme production facility or pre-staged crisis
+                        content pipeline. <strong>Empathy-based:</strong> Framing people's genuine
+                        emotional coping through humor as "evidence" of manipulation dismisses
+                        real human responses to trauma.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- STRATEGIES SUMMARY -->
+        <div class="analysis-card">
+            <h3>Summary of Strategies Used to Construct This Conspiracy Theory</h3>
+
+            <p><strong>1. Anchoring in real facts:</strong> Every piece of evidence begins with a verifiable data point (Pentagon spending, DARPA programs, Reddit data). This builds initial trust before the <span class="term">false cause</span> reasoning is layered on top.</p>
+
+            <p><strong>2. Misleading statistics:</strong> Real numbers are stripped of context, plotted on manipulated axes, or compared against incompatible benchmarks. Three distinct types were used: <span class="term">graphical manipulation</span> (dual-axis chart), <span class="term">context stripping</span> (removing historical turnout data), and <span class="term">percent vs. count conflation</span> (Eglin per-capita data).</p>
+
+            <p><strong>3. <span class="term">Red flag phrases</span>:</strong> Phrases like "Let that sink in," "Do your own research," "There are no coincidences," and "The media won't report this" are scattered throughout to create urgency, bypass critical thinking, and signal in-group belonging.</p>
+
+            <p><strong>4. Misinformation types:</strong> The theory uses <span class="term">false context</span> (DARPA cropped screenshot), <span class="term">fabricated content</span> (the non-existent meme speed "study"), and <span class="term">imposter content</span> (Eglin data reframed within a false narrative).</p>
+
+            <p><strong>5. Unfalsifiability:</strong> The theory is designed so that <em>any</em> evidence against it can be absorbed as proof of the cover-up, making it impossible to disprove from within its own logic.</p>
+        </div>
+
+    </div>
+</section>
+
+<hr class="divider">
+
+<!-- PART 4: PURPOSE & RELEVANCE -->
+<section id="purpose" class="purpose-zone">
+    <div class="container">
+        <div class="section-label">Part 4 // Purpose &amp; Relevance</div>
+        <h2>Why This Matters: A Case for Media Literacy</h2>
+        <p class="section-desc">Synthesizing research to explain why this project is relevant to you, your peers, and our information ecosystem.</p>
+
+        <p>
+            The purpose of this project is to demonstrate, through first-hand construction, how
+            <strong>easily real data can be weaponized into convincing misinformation</strong> and
+            to argue that <strong>media literacy education is not optional but urgent</strong> for
+            young people navigating a post-truth information landscape.
+        </p>
+
+        <div class="callout-box">
+            <h3>Why is this relevant?</h3>
+            <p>
+                According to a Stanford History Education Group study (2016), <strong>82% of
+                middle school students could not distinguish between a news article and sponsored
+                content</strong>. A subsequent 2019 follow-up found that the majority of high school
+                students could not reliably identify manipulated images or evaluate source credibility
+                (Breakstone et al., 2021). These are not hypothetical vulnerabilities; they are
+                the exact skills exploited by the conspiracy theory you just read.
+            </p>
+        </div>
+
+        <p>
+            This project matters because the conspiracy theory above was <em>not hard to make</em>.
+            Every piece of "evidence" was built from real, publicly available data that took minutes
+            to find and seconds to reframe. The rhetorical strategies used (<span class="term">
+            correlation-as-causation</span>, <span class="term">context stripping</span>,
+            <span class="term">equivocation</span>, and <span class="term">red flag phrases</span>)
+            are the same techniques used by actual disinformation campaigns, from anti-vaccine movements
+            to election interference operations (Wardle &amp; Derakhshan, 2017, <em>Information
+            Disorder</em>, Council of Europe).
+        </p>
+
+        <p>
+            Research by Pennycook and Rand (2019) in the journal <em>Cognition</em> found that
+            people share misinformation not because they believe it, but because <strong>they fail
+            to stop and think about whether it's accurate before sharing</strong>. The "meme format"
+            is particularly dangerous in this regard: its brevity, humor, and visual design bypass
+            the analytical processing that longer-form content triggers. Roozenbeek and van der Linden
+            (2019) demonstrated in <em>Palgrave Communications</em> that "prebunking" (exposing
+            people to weakened forms of misinformation techniques) significantly improved their
+            ability to identify and resist manipulation. <strong>This project is, itself, a prebunking
+            exercise.</strong>
+        </p>
+
+        <p>
+            To my peers: you have just seen how five pieces of "evidence," each grounded in a real
+            fact, can be stitched together into a narrative that <em>feels</em> true. The conspiracy
+            theory about government memes probably made you pause at least once and think, "Wait,
+            is that actually...?" That moment of hesitation is exactly the vulnerability that
+            misinformation exploits. The antidote is not cynicism or paranoia; it is the
+            disciplined habit of asking: <em>What is the source? What context is missing? What
+            logical leaps are being made? Who benefits from me believing this?</em>
+        </p>
+
+        <p>
+            As Sagan (1995) wrote in <em>The Demon-Haunted World</em>, "One of the saddest lessons
+            of history is this: If we've been bamboozled long enough, we tend to reject any evidence
+            of the bamboozle." This project exists to make the bamboozle visible, so we can
+            recognize it the next time it's aimed at us.
+        </p>
+    </div>
+</section>
+
+<hr class="divider">
+
+<!-- CITATIONS -->
+<section id="citations">
+    <div class="container">
+        <div class="section-label">Sources</div>
+        <h2>Works Cited</h2>
+        <p class="section-desc">All sources referenced in the conspiracy theory, analysis, and debunking sections.</p>
+
+        <ol class="citation-list">
+            <li>Associated Press. (2009). "Pentagon Spent $4.7 Billion on PR, Propaganda." <em>AP News</em>.</li>
+            <li>Breakstone, J., Smith, M., Wineburg, S., et al. (2021). "Students' Civic Online Reasoning: A National Portrait." <em>Educational Researcher</em>, 50(8), 505-515.</li>
+            <li>CIRCLE (Center for Information &amp; Research on Civic Learning and Engagement). (2014, 2018, 2020). Youth Voter Turnout Data Reports. Tufts University.</li>
+            <li>Common Sense Media. (2015). "The Common Sense Census: Media Use by Tweens and Teens."</li>
+            <li>DARPA. (2011). "Social Media in Strategic Communication (SMISC)." Program Solicitation, DARPA-BAA-11-64.</li>
+            <li>Dawkins, R. (1976). <em>The Selfish Gene</em>. Oxford University Press.</li>
+            <li>Martin, R. A. (2007). <em>The Psychology of Humor: An Integrative Approach</em>. Elsevier Academic Press.</li>
+            <li>Oxford Internet Institute. (2020). "The Computational Propaganda Project." University of Oxford.</li>
+            <li>Pennycook, G., &amp; Rand, D. G. (2019). "Lazy, Not Biased: Susceptibility to Partisan Fake News Is Better Explained by Lack of Reasoning Than by Motivated Reasoning." <em>Cognition</em>, 188, 39-50.</li>
+            <li>Reddit Blog. (2013). "Most Addicted Cities (Reddit Traffic Data)." <em>blog.reddit.com</em> (archived).</li>
+            <li>Roozenbeek, J., &amp; van der Linden, S. (2019). "Fake News Game Confers Psychological Resistance Against Online Misinformation." <em>Palgrave Communications</em>, 5(65).</li>
+            <li>Sagan, C. (1995). <em>The Demon-Haunted World: Science as a Candle in the Dark</em>. Random House.</li>
+            <li>Snopes. (2018). "Did DARPA Create a 'Meme Warfare' Program?" <em>Snopes.com</em>.</li>
+            <li>Stanford History Education Group. (2016). "Evaluating Information: The Cornerstone of Civic Online Reasoning."</li>
+            <li>Vigen, T. (2015). <em>Spurious Correlations</em>. Hachette Books.</li>
+            <li>Wardle, C., &amp; Derakhshan, H. (2017). "Information Disorder: Toward an Interdisciplinary Framework for Research and Policymaking." <em>Council of Europe Report</em>, DGI(2017)09.</li>
+        </ol>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+    <p style="margin-bottom:8px; color: var(--accent); font-family: 'JetBrains Mono', monospace; font-size: 12px; letter-spacing: 2px;">EDUCATIONAL PROJECT</p>
+    <p>This website was created as an academic exercise in identifying and debunking misinformation and manipulative rhetoric.</p>
+    <p style="margin-top:4px;">The conspiracy theory presented is <strong>entirely fictional</strong> and was designed to be deconstructed.</p>
+    <p style="margin-top:16px; font-family: 'Inter', sans-serif; font-weight: 600; color: var(--text);">Created by Aadhavun Anand, Bhargav Panakanti, and Yug Sharma</p>
+</footer>
+
+<!-- Smooth scroll & active nav -->
+<script>
+    document.querySelectorAll('nav a').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                const pos = target.getBoundingClientRect().top + window.pageYOffset - 60;
+                window.scrollTo({ top: pos, behavior: 'smooth' });
+            }
+        });
+    });
+    window.addEventListener('scroll', () => {
+        const sections = document.querySelectorAll('section[id]');
+        let current = '';
+        sections.forEach(section => {
+            if (pageYOffset >= section.offsetTop - 100) current = section.getAttribute('id');
+        });
+        document.querySelectorAll('nav a').forEach(a => {
+            a.classList.remove('active');
+            if (a.getAttribute('href') === '#' + current) a.classList.add('active');
+        });
+    });
+</script>
+
+</body>
+</html>
